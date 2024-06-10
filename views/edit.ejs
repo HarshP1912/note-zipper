@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Message</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+    <h1>Edit your Note</h1>
+    <hr>
+    <div class="notes">
+        <h3><%= notes.name %></h3>
+        <p> <%= notes.created_at.toString().split(" ")[4] %>
+            <%= notes.created_at.toString().split(" ").slice(0,4).join("-") %>
+        </p>
+    </div>
+    <br><br>
+    <form method="POST" action="/notes/<%= notes._id %>?_method=PUT">
+        <textarea name="note" cols="100" rows="20"><%= notes.note %></textarea>
+        <br><br>
+        <button>Edit Note</button>
+    </form>
+</body>
+</html>

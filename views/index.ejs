@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NOTE ZIPPER</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <h1>NOTE ZIPPER</h1>
+    <div class="btn-cont">
+      <form action="/notes/new" method="GET">
+        <button class="btn">Create New Note</button>
+      </form>
+    </div>
+    <hr />
+    <div class="notes-cont">
+      <% for(note of notes) { %>
+      <div class="notes">
+        <h3 style="text-align: center"><i><%= note.name %></i></h3>
+        <div class="note">
+          <!-- <p><%= note.note %></p> -->
+          <div class="disp">
+            <form action="/notes/<%= note.id %>/edit" method="GET">
+              <button>Edit</button>
+            </form>
+            <form action="/notes/<%= note.id %>?_method=DELETE" method="POST">
+              <button>Delete</button>
+            </form>
+            <form action="/notes/<%= note.id %>" method="GET">
+              <button>Show</button>
+            </form>
+          </div>
+        </div>
+        <p>
+          Created At: <%= note.created_at.toString().split(" ")[4] %> <%=
+          note.created_at.toString().split(" ").slice(0,4).join("-") %>
+        </p>
+        <% if (note.updated_at && note.updated_at.getTime() !==
+        note.created_at.getTime()) { %>
+        <p>
+          Updated At: <%= note.updated_at.toString().split(" ")[4] %> <%=
+          note.updated_at.toString().split(" ").slice(0,4).join("-") %>
+        </p>
+        <% } %>
+      </div>
+      <br />
+      <% } %>
+    </div>
+  </body>
+</html>
